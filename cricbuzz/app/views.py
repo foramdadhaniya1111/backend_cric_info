@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer
 
+
 class player_info_viewset(viewsets.ModelViewSet):
     queryset = player_info.objects.all()
     serializer_class = player_info_serializer 
@@ -40,10 +41,5 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     serializer_class = icc_all_rounder_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
-    
-    def list(self, request):
-        queryset = self.get_queryset().select_related('player')
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
     
     

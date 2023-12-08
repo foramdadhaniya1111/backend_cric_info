@@ -26,5 +26,11 @@ class icc_all_rounder(models.Model):
     series =models.CharField(max_length=50)
     player = models.ForeignKey(player_info,on_delete=models.CASCADE,auto_created=True)
     
-
-    
+class espncrici_player_info(models.Model):
+    player_id = models.AutoField(primary_key=True)
+    player_name = models.CharField(max_length=255)
+    player_age = models.CharField(max_length=255)
+    player_image = models.CharField(max_length=255)
+    player_gender = models.CharField(max_length=10)
+    player_playing_role = models.CharField(max_length=255)
+    player_country = models.CharField(max_length=255)

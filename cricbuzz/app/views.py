@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponse
+
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import player_info , icc_batting,icc_bowling,icc_all_rounder

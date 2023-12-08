@@ -12,16 +12,20 @@ class player_info_serializer(serializers.ModelSerializer):
         return self.context['request'].build_absolute_uri(obj.image)
         
 class icc_batting_serializer(serializers.ModelSerializer):
+    player = player_info_serializer(read_only=True)
+
     class Meta:
         model = icc_batting
-        fields = '__all__'
+        fields = ['player', 'position', 'rating', 'series']
         
 class icc_bowling_serializer(serializers.ModelSerializer):
+    player = player_info_serializer(read_only=True)
     class Meta:
         model = icc_bowling
         fields = '__all__'
         
 class icc_all_rounder_serializer(serializers.ModelSerializer):
+    player = player_info_serializer(read_only=True)
     class Meta:
         model = icc_all_rounder
         fields = '__all__'

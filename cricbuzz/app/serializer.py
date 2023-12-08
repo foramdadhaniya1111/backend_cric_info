@@ -13,7 +13,6 @@ class player_info_serializer(serializers.ModelSerializer):
         
 class icc_batting_serializer(serializers.ModelSerializer):
     class Meta:
-        
         model = icc_batting
         fields = '__all__'
         

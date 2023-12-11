@@ -140,8 +140,8 @@ STATIC_URL = '/static/'
 #     ]
 # }
 
-ALLOWED_HOSTS=['192.168.29.128']
-ALLOWED_HOSTS = ['192.168.29.84']
+ALLOWED_HOSTS=['192.168.29.128','192.168.29.84']
+# ALLOWED_HOSTS = ['192.168.29.84']
 CORS_ALLOWED_ORIGINS = [
     'http://192.168.29.84:8000',
     'http://localhost:5173',

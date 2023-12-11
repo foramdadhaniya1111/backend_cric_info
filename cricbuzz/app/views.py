@@ -21,7 +21,7 @@ class icc_batting_viewset(viewsets.ModelViewSet):
     search_fields = ['position', 'rating', 'series']
     http_method_names = ['get', 'head', 'options']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series']
+    filterset_fields = ['series','player__gender']
     
 
     # def list(self, request):
@@ -36,7 +36,7 @@ class icc_bowling_viewset(viewsets.ModelViewSet):
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series']
+    filterset_fields = ['series','player__gender']
 
     # def list(self, request):
     #     queryset = self.get_queryset().select_related('player')
@@ -49,7 +49,7 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series']
+    filterset_fields = ['series','player__gender']
     
     
     

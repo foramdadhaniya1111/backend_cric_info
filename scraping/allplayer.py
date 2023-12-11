@@ -1,4 +1,4 @@
-import mysql.connector
+from mysql.connector import connect as ConnectDB
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -11,12 +11,11 @@ try:
     "password": "12345",
     "host": "localhost",
     "port": "3306",
-    "database": "ICC_TOP_RANKING",
+    "database": "ICC_TOP_RANKING"
     }
-    conn = mysql.connector.connect(**config)
+    conn = ConnectDB(**config)    
     if conn.is_connected():
         print("Connected")
-    
     myc = conn.cursor(buffered=True)
     
 
@@ -25,7 +24,7 @@ try:
     
     for gender_k, gender_v in gender.items():
         for style_k, style_v in playing_style.items():
-            print(f"strting for {style_k}")
+            # print(f"strting for {style_k}")
             url = f"https://www.cricbuzz.com/cricket-stats/icc-rankings/{gender_k}/{style_k}"
             print(url)
             r = requests.get(url)
@@ -41,11 +40,12 @@ try:
             test = soup.find("div",attrs={"ng-show":f"'{style_v}-tests' == act_rank_format"})# 'bowlers-tests' 'allrounders-tests'
             if test:
                 series_dict["test"]=test
+                
             odi = soup.find("div",attrs={"ng-show":f"'{style_v}-odis' == act_rank_format"})
             if odi:
                 series_dict["odi"]=odi
                 
-            t20 = soup.find("div",attrs={"ng-show":f"({style_v}-t20s' == act_rank_format"})
+            t20 = soup.find("div",attrs={"ng-show":f"'{style_v}-t20s' == act_rank_format"})
             if t20:
                 series_dict["t20"]=t20
         
@@ -84,6 +84,7 @@ try:
                     myc.execute(sql)
                     
     conn.commit()
+    conn.close()
                     # player_id = myc.lastrowid
    
 except Exception as e:

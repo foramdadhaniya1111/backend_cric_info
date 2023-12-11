@@ -68,7 +68,7 @@ try:
 
                     myc.execute(f"SELECT * FROM app_player_info WHERE name='{name}'")
                     existing_player = myc.fetchone()
-                    print(existing_player)
+                    # print(existing_player)
                     if existing_player==None:
                         d = (image, name, coutry, gender_v)
                         sql = (f"INSERT INTO app_player_info(image, name, country, gender) VALUES ('%s', '%s', '%s', '%s')"%d) 

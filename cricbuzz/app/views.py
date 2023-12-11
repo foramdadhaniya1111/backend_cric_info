@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import player_info , icc_batting,icc_bowling,icc_all_rounder
+from .models import player_info , icc_batting,icc_bowling,icc_all_rounder,espncrici_player_info
 from rest_framework import viewsets
-from rest_framework.response import Response
+
 from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer
+from .models import espncrici_player_info
+from .serializer import PlayerSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+
+from rest_framework.response import Response
+from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer,PlayerSerializer
 
 
 class player_info_viewset(viewsets.ModelViewSet):
@@ -48,8 +54,23 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     serializer_class = icc_all_rounder_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
+<<<<<<< HEAD
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['series','player__gender']
     
     
     
+=======
+
+
+
+class playerViewSet(viewsets.ModelViewSet):
+    queryset = espncrici_player_info.objects.all()
+    serializer_class = PlayerSerializer
+    filterset_fields =['player_country','player_gender','player_playing_role']
+
+# class afghanistan_player(viewsets.ModelViewSet):
+#     queryset = espncrici_player_info.objects.filter(player_country='afghanistan-40').
+#     serializer_class = PlayerSerializer
+
+>>>>>>> 667eec93cb9ab980e1df9c32dc763d86728f883b

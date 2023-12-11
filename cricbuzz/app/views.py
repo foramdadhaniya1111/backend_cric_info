@@ -41,12 +41,9 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     serializer_class = icc_all_rounder_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
-<<<<<<< HEAD
+
 
 
 class playerViewSet(viewsets.ModelViewSet):
     queryset = espncrici_player_info.objects.all()
     serializer_class = PlayerSerializer
-=======
-    
->>>>>>> 518754d409b16afb724b702e0caf0f62eefd199b

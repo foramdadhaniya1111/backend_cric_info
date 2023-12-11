@@ -42,4 +42,3 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
     
-    

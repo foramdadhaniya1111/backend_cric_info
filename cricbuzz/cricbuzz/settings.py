@@ -140,8 +140,13 @@ STATIC_URL = '/static/'
 #     ]
 # }
 
+<<<<<<< HEAD
 ALLOWED_HOSTS=['192.168.29.128','192.168.29.84']
 # ALLOWED_HOSTS = ['192.168.29.84']
+=======
+ALLOWED_HOSTS=['192.168.29.128']
+
+>>>>>>> 518754d409b16afb724b702e0caf0f62eefd199b
 CORS_ALLOWED_ORIGINS = [
     'http://192.168.29.84:8000',
     'http://localhost:5173',
@@ -160,9 +165,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
-    ]
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'knox.auth.TokenAuthentication',
+    # ]
 }

@@ -1,11 +1,11 @@
-from django.shortcuts import render
+
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import player_info , icc_batting,icc_bowling,icc_all_rounder
+from .models import player_info , icc_batting,icc_bowling,icc_all_rounder,espncrici_player_info
 from rest_framework import viewsets
-from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer
-from .models import espncrici_player_info
-from .serializer import PlayerSerializer
+from rest_framework.response import Response
+from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer,PlayerSerializer
+
 
 class player_info_viewset(viewsets.ModelViewSet):
     queryset = player_info.objects.all()
@@ -16,8 +16,14 @@ class player_info_viewset(viewsets.ModelViewSet):
 class icc_batting_viewset(viewsets.ModelViewSet):
     queryset = icc_batting.objects.all()
     serializer_class = icc_batting_serializer
-    search_fields=['position','rating','series']
+    search_fields = ['position', 'rating', 'series']
     http_method_names = ['get', 'head', 'options']
+
+    def list(self, request):
+        queryset = self.get_queryset().select_related('player')
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
 
 class icc_bowling_viewset(viewsets.ModelViewSet):
     queryset = icc_bowling.objects.all()
@@ -25,13 +31,22 @@ class icc_bowling_viewset(viewsets.ModelViewSet):
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
 
+    def list(self, request):
+        queryset = self.get_queryset().select_related('player')
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
 class icc_all_rounder_viewset(viewsets.ModelViewSet):
     queryset = icc_all_rounder.objects.all()
     serializer_class = icc_all_rounder_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
+<<<<<<< HEAD
 
 
 class playerViewSet(viewsets.ModelViewSet):
     queryset = espncrici_player_info.objects.all()
     serializer_class = PlayerSerializer
+=======
+    
+>>>>>>> 518754d409b16afb724b702e0caf0f62eefd199b

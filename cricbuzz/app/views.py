@@ -6,6 +6,9 @@ from rest_framework import viewsets
 from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer
 from .models import espncrici_player_info
 from .serializer import PlayerSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+
+
 
 class player_info_viewset(viewsets.ModelViewSet):
     queryset = player_info.objects.all()
@@ -35,3 +38,8 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
 class playerViewSet(viewsets.ModelViewSet):
     queryset = espncrici_player_info.objects.all()
     serializer_class = PlayerSerializer
+    filterset_fields =['player_country','player_gender','player_playing_role']
+
+# class afghanistan_player(viewsets.ModelViewSet):
+#     queryset = espncrici_player_info.objects.filter(player_country='afghanistan-40').
+#     serializer_class = PlayerSerializer

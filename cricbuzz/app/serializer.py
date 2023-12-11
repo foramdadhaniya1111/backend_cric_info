@@ -8,7 +8,7 @@ class player_info_serializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     class Meta:
         model = player_info
-        fields = ['id','image','name','country','gender']
+        fields = ['image','name','country','gender']
     def get_image(self, obj):
         return self.context['request'].build_absolute_uri(obj.image)
         

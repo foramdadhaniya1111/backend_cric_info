@@ -8,7 +8,7 @@ from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_ba
 from .models import espncrici_player_info
 from .serializer import PlayerSerializer
 from django_filters.rest_framework import DjangoFilterBackend
-
+from django.db.models import Q
 from rest_framework.response import Response
 from .serializer import player_info_serializer,icc_all_rounder_serializer,icc_batting_serializer,icc_bowling_serializer,PlayerSerializer
 
@@ -26,9 +26,19 @@ class icc_batting_viewset(viewsets.ModelViewSet):
     serializer_class = icc_batting_serializer
     search_fields = ['position', 'rating', 'series']
     http_method_names = ['get', 'head', 'options']
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series','player__gender']
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['series','player__gender']
     
+    def get_queryset(self):
+        series = self.request.GET.get('series')
+        player_gender = self.request.GET.get('gender')
+        if series and player_gender:
+            qs = icc_batting.objects.filter(Q(series=series) & Q(player__gender=player_gender))    
+        elif series:
+            qs = icc_batting.objects.filter(Q(series=series))
+        elif player_gender:
+            qs = icc_batting.objects.filter(Q(player__gender=player_gender))    
+        return qs
 
     # def list(self, request):
     #     queryset = self.get_queryset().select_related('player')
@@ -41,8 +51,19 @@ class icc_bowling_viewset(viewsets.ModelViewSet):
     serializer_class = icc_bowling_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series','player__gender']
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['series','player__gender']
+    
+    def get_queryset(self):
+        series = self.request.GET.get('series')
+        player_gender = self.request.GET.get('gender')
+        if series and player_gender:
+            qs = icc_batting.objects.filter(Q(series=series) & Q(player__gender=player_gender))    
+        elif series:
+            qs = icc_batting.objects.filter(Q(series=series))
+        elif player_gender:
+            qs = icc_batting.objects.filter(Q(player__gender=player_gender))    
+        return qs
 
     # def list(self, request):
     #     queryset = self.get_queryset().select_related('player')
@@ -54,15 +75,17 @@ class icc_all_rounder_viewset(viewsets.ModelViewSet):
     serializer_class = icc_all_rounder_serializer
     search_fields=['position','rating','series']
     http_method_names = ['get', 'head', 'options']
-<<<<<<< HEAD
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series','player__gender']
-    
-    
-    
-=======
 
-
+    def get_queryset(self):
+        series = self.request.GET.get('series')
+        player_gender = self.request.GET.get('gender')
+        if series and player_gender:
+            qs = icc_batting.objects.filter(Q(series=series) & Q(player__gender=player_gender))    
+        elif series:
+            qs = icc_batting.objects.filter(Q(series=series))
+        elif player_gender:
+            qs = icc_batting.objects.filter(Q(player__gender=player_gender))    
+        return qs
 
 class playerViewSet(viewsets.ModelViewSet):
     queryset = espncrici_player_info.objects.all()
@@ -73,4 +96,3 @@ class playerViewSet(viewsets.ModelViewSet):
 #     queryset = espncrici_player_info.objects.filter(player_country='afghanistan-40').
 #     serializer_class = PlayerSerializer
 
->>>>>>> 667eec93cb9ab980e1df9c32dc763d86728f883b
